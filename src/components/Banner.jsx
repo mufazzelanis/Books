@@ -26,11 +26,28 @@ const Banner = () => {
 
                     </motion.p>
 
-                    <motion.button whileHover={{scale:1.0}}
-                    whileTap={{scale:0.95}}
-                    onClick={() => document.getElementById('hero').scrollIntoView({ behavior: 'smooth' })}
-                    className=' bg-gradient-to-r from-cyan-500 to-blue-600 w-fit px-8 py-3 rounded-full font-bold text-white shadow-lg hover:shadow-cyan-500/30 transition-all'>
-                            {t('banner.cta')}
+                    <motion.button
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5, duration: 0.6 }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => {
+                            const el = document.getElementById('hero')
+                            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                        }}
+                        className="group relative bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 w-fit px-9 py-4 rounded-full font-bold text-white shadow-[0_0_30px_-5px_rgba(34,211,238,0.4)] hover:shadow-[0_0_50px_-5px_rgba(34,211,238,0.6)] transition-all duration-500 overflow-hidden"
+                    >
+                        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-300/10 to-transparent animate-pulse" />
+                        <span className="relative flex items-center gap-3">
+                            <span>{t('banner.cta')}</span>
+                            <span className="inline-block transition-transform duration-300 group-hover:translate-x-1 group-hover:scale-110">
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </span>
+                        </span>
                     </motion.button>
                 </div>
                 {/*  Image Container */}

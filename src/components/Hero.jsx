@@ -93,7 +93,7 @@ const Hero = ({ searchQuery, onSearch }) => {
     // Empty state — beautiful landing
     if (!searchQuery.trim()) {
         return (
-            <div className="min-h-screen pt-20 bg-gradient-to-b from-gray-900/60 via-gray-900/40 to-gray-800/30">
+            <div id="hero" className="min-h-screen pt-20 bg-gradient-to-b from-gray-900/60 via-gray-900/40 to-gray-800/30">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
