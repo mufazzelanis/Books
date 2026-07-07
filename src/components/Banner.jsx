@@ -1,11 +1,12 @@
-import React from 'react'
 import { motion } from 'framer-motion'
 import img from '../assets/imgbg.png'
 import FloatingParticle from './FloatingParticle'
+import { useSettings } from '../context/SettingsContext'
 
 const Banner = () => {
+  const { t } = useSettings();
   return (
-    <div className=' min-h-screen bg-gradient-to-br from-gray-900 to-blue-900/30 relative overflow-hidden'>
+    <div className=' min-h-screen bg-gradient-to-br from-gray-900/80 to-blue-900/20 relative overflow-hidden'>
         <div className=' container mx-auto px-4 h-screen flex items-center'>
             <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full'>
                 {/* TEXT CONTENT*/}
@@ -14,14 +15,14 @@ const Banner = () => {
                     <motion.h1 initial={{opacity:0, y:20}}
                     animate ={{opacity:1, y:0}}
                     className=' text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent'>
-                        Interective Library
+                        {t('banner.title')}
                     </motion.h1>
 
                     <motion.p initial={{opacity:0}}
                     animate= {{opacity:1}}
                     transition={{ delay: 0.3}}
                     className=' text-lg text-cyan-100/80'>
-                        Explore Our Collection With dynamic previews and immersive interaction
+                        {t('banner.subtitle')}
 
                     </motion.p>
 
@@ -29,7 +30,7 @@ const Banner = () => {
                     whileTap={{scale:0.95}}
                     onClick={() => document.getElementById('hero').scrollIntoView({ behavior: 'smooth' })}
                     className=' bg-gradient-to-r from-cyan-500 to-blue-600 w-fit px-8 py-3 rounded-full font-bold text-white shadow-lg hover:shadow-cyan-500/30 transition-all'>
-                            Start Exploring
+                            {t('banner.cta')}
                     </motion.button>
                 </div>
                 {/*  Image Container */}
