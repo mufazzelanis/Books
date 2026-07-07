@@ -169,7 +169,7 @@ const Navbar = ({ handleSearch, onBookSelect, profile, onSignIn, onSettings, onS
             <div className=' bg-gray-900/80 backdrop-blur-sm rounded-xl p-2'>
               <h1 className=' text-lg md:text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent animate-text-shine'>
                 <BookOpenIcon className=' w-5 h-5 md:h-6 md:w-6 inline-block animate-float text-cyan-400 mr-1 md:mr-2 stroke-[2.5]' />
-                <a href="/" className=' ml-1 md:ml-2 text-shadow-[0_0_10px_rgba(96,165,250,0.5)]'>
+                <a href="/Books/" className=' ml-1 md:ml-2 text-shadow-[0_0_10px_rgba(96,165,250,0.5)]'>
                   BOOKSHOW
                 </a>
               </h1>
