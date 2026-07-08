@@ -2,14 +2,14 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 import {
   BookOpenIcon, MagnifyingGlassCircleIcon, XMarkIcon, BookmarkIcon,
   UserCircleIcon, Cog6ToothIcon,
-  ArrowRightOnRectangleIcon, HeartIcon
+  ArrowRightOnRectangleIcon, HeartIcon, GlobeAltIcon
 } from "@heroicons/react/24/outline";
 import FloatingParticle from './FloatingParticle';
 import { useSettings } from '../context/SettingsContext';
 
 const API_KEY = "AIzaSyDhLI6vmoJqJGu6F4NT9sGHj6wusopkK8I";
 
-const Navbar = ({ handleSearch, onBookSelect, profile, onSignIn, onSettings, onSignOut }) => {
+const Navbar = ({ handleSearch, onBookSelect, profile, onSignIn, onSettings, onSignOut, onCoreApi }) => {
   const { t } = useSettings();
 
   const [isHovered, setIsHovered] = useState(false);
@@ -21,6 +21,11 @@ const Navbar = ({ handleSearch, onBookSelect, profile, onSignIn, onSettings, onS
   const [showProfile, setShowProfile] = useState(false);
 
   const profileMenu = [
+    {
+      label: 'Country List',
+      icon: GlobeAltIcon,
+      action: () => { setShowProfile(false); if (onCoreApi) onCoreApi(); }
+    },
     {
       label: t('nav.settings'),
       icon: Cog6ToothIcon,

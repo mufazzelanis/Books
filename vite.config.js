@@ -9,4 +9,13 @@ export default defineConfig({
 
   ],
   base: '/Books/',
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://core-api.test',
+        changeOrigin: true,
+        headers: { 'X-Panel-Domain': 'b2b.com' },
+      },
+    },
+  },
 })

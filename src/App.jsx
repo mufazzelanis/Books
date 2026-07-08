@@ -9,18 +9,20 @@ import BookDetail from './components/BookDetail';
 import SettingsModal from './components/SettingsModal';
 import SignInModal from './components/SignInModal';
 import AnimatedBackground from './components/AnimatedBackground';
+import CoreApiView from './components/CoreApiView';
 import { SettingsProvider } from './context/SettingsContext';
+import { AuthProvider } from './context/AuthContext';
 
 const exploreIds = ['best-sellers', 'new-releases', 'trending', 'categories']
 
-const App = () => {
-
+const AppContent = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [contentPage, setContentPage] = useState(null);
   const [selectedBookId, setSelectedBookId] = useState(null);
   const [profile, setProfile] = useState({ name: '', initials: '', email: '' });
   const [showSettings, setShowSettings] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
+  const [showCoreApi, setShowCoreApi] = useState(false);
   const isExplore = exploreIds.includes(contentPage);
 
   useEffect(() => {
@@ -30,7 +32,7 @@ const App = () => {
   }, []);
 
   return (
-    <SettingsProvider>
+    <>
       <AnimatedBackground />
       <div className='bg-gray-900/60 min-h-screen flex flex-col' style={{ background: 'var(--bg-primary, transparent)' }}>
         <Navbar
@@ -40,16 +42,19 @@ const App = () => {
           onSignIn={() => setShowSignIn(true)}
           onSettings={() => setShowSettings(true)}
           onSignOut={() => setProfile({ name: '', initials: '', email: '' })}
+          onCoreApi={() => setShowCoreApi(true)}
         />
-        {isExplore ? (
+        {showCoreApi ? (
+          <CoreApiView onClose={() => setShowCoreApi(false)} />
+        ) : isExplore ? (
           <ExploreView exploreId={contentPage} onClose={() => setContentPage(null)} onBookSelect={(id) => setSelectedBookId(id)} />
         ) : (
           <>
-            <Banner/>
+            <Banner />
             <Hero searchQuery={searchQuery} onSearch={(term) => setSearchQuery(term)} />
           </>
         )}
-        <Footer onContentClick={(id) => setContentPage(id)}/>
+        <Footer onContentClick={(id) => setContentPage(id)} />
       </div>
       <ContentViewer pageId={contentPage && !isExplore ? contentPage : null} onClose={() => setContentPage(null)} />
       <BookDetail bookId={selectedBookId} onClose={() => setSelectedBookId(null)} />
@@ -62,6 +67,16 @@ const App = () => {
         onClose={() => setShowSignIn(false)}
         onSignIn={(p) => setProfile(p)}
       />
+    </>
+  )
+}
+
+const App = () => {
+  return (
+    <SettingsProvider>
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
     </SettingsProvider>
   )
 }
