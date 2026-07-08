@@ -28,6 +28,13 @@ function getHeaders(includeAuth = true) {
 }
 
 async function handleResponse(res) {
+  const ct = res.headers.get('content-type') || ''
+  if (!ct.includes('application/json')) {
+    throw new CoreApiError(
+      'Backend server is not available. The API only works when the backend is running locally.',
+      503, null
+    )
+  }
   const data = await res.json()
   if (!res.ok) {
     if (res.status === 401) {
